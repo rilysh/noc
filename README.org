@@ -1,0 +1,27 @@
+** noc
+A tiny build system directly usable from the C code.
+
+** Usage
+#+begin_src c
+#include <stdio.h>
+
+#include "noc.h"
+
+int main(void)
+{
+	if (noc_compare_age("1.c", "1") == NOC_AGE_OUTDATED)
+		noc_cc_compile("1.c", "1", NOC_OPTM_LVL_FAST,
+			       NOC_DEBUG_ONE, NOC_STRIP_NO);
+	if (noc_compare_age("f.c", "f") == NOC_AGE_OUTDATED) {
+		noc_pass_command(6, NOC_CC_PATH, "f.c", "-o", "f",
+				 "-DUSE_NCURSES", "-lcurses");
+		noc_pass_shell("cc f.c -o g");
+	}
+
+        noc_log_info("updated.\n");
+}
+#+end_src
+
+** Note
+I made this for my own purpose, I definitely don't recommend
+using it in big projects.

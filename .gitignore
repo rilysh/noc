@@ -1,0 +1,9 @@
+# Binary files
+*.out
+*.c
+1
+f
+g
+
+# Others
+others/
